@@ -21,10 +21,23 @@ php artisan make:seeder PostsSeeder - создать наполнитель те
 php artisan db:seed - запуск наполнителя текста
 php artisan migrate:fresh --seed - Если нужно очистить базу и пересоздать все таблицы перед заполнением
 
-
 php artisan config:clear
 php artisan cache:clear
 php artisan route:cache
 
 Применить права для Debian файлов если php storm ругается
 sudo chown -R $USER:$USER api-my-ssr-dev.ru
+
+Создание нового проекта
+https://www.binaryboxtuts.com/php-tutorials/laravel-11-json-web-tokenjwt-authentication/ - JWT token laravel
+
+https://laravel.com/docs/11.x/routing#cors - правка корсов
+cors.php:
+'paths' => ['*'],
+'allowed_methods' => ['*'],
+'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+'allowed_origins_patterns' => [],
+'allowed_headers' => ['*'],
+'exposed_headers' => [],
+'max_age' => 0,
+'supports_credentials' => true,
