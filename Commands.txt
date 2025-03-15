@@ -1,0 +1,30 @@
+http://localhost:8876/
+тут делаем api для ssr
+
+wsl
+http://api-my-ssr-dev.ru:8876/
+удалить лишние файлы при копировании
+sudo find /var/www/api-my-ssr-dev.ru -type f -name '*Zone.Identifier' -delete
+
+http://localhost:8080/
+phpMyAdmin
+
+Чиним корсы
+php artisan config:publish cors
+
+Создание бытовых команд
+php artisan make:controller PostsController  - создать контроллер
+php artisan make:migration create_posts_table - создать миграцию
+php artisan migrate:refresh - перезоздать таблицы из миграции
+php artisan make:model Posts - создать модель
+php artisan make:seeder PostsSeeder - создать наполнитель текста
+php artisan db:seed - запуск наполнителя текста
+php artisan migrate:fresh --seed - Если нужно очистить базу и пересоздать все таблицы перед заполнением
+
+
+php artisan config:clear
+php artisan cache:clear
+php artisan route:cache
+
+Применить права для Debian файлов если php storm ругается
+sudo chown -R $USER:$USER api-my-ssr-dev.ru

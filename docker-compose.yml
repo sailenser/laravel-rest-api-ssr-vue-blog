@@ -1,0 +1,44 @@
+services:
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./:/var/www
+            - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+        ports:
+            - "8876:3499"
+        depends_on:
+            - app
+        container_name: api-my-ssr-nginx
+
+    app:
+        build:
+            context: .
+            dockerfile: _docker/app/Dockerfile
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - mysql
+        container_name: api-my-ssr-app
+
+    mysql:
+        image: mysql:8.3
+        restart: always
+        volumes:
+            - ./tmp/db:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: dbBlogSsrR
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "8101:3306"
+        command: --lower_case_table_names=0
+        container_name: api-my-ssr-db
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        restart: always
+        ports:
+            - "8080:80"
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: root
+        container_name: api-my-ssr-phpmyadmin
