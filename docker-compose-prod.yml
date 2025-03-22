@@ -19,14 +19,14 @@ services:
     volumes:
       - ./:/var/www
     depends_on:
-      - mysql
+      - db
     container_name: api-my-ssr-app
     environment:
-      DB_HOST: mysql
+      DB_HOST: db
     networks:
       - api_lavrik_php_site
 
-  mysql:
+  db:
     image: mysql:8.3
     restart: always
     volumes:
