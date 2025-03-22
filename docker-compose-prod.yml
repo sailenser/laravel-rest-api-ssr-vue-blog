@@ -10,7 +10,7 @@ services:
       - app
     container_name: api-my-ssr-nginx
     networks:
-      - my_network
+      - network-my
 
   app:
     build:
@@ -24,7 +24,7 @@ services:
     environment:
       DB_HOST: mysql
     networks:
-      - my_network
+      - network-my
 
   mysql:
     image: mysql:8.3
@@ -38,7 +38,7 @@ services:
       - "8101:3306"
     container_name: api-my-ssr-db
     networks:
-      - my_network
+      - network-my
 
 networks:
   network-my:
