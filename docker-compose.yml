@@ -30,7 +30,6 @@ services:
             MYSQL_ROOT_PASSWORD: root
         ports:
             - "8101:3306"
-        command: --lower_case_table_names=0
         container_name: api-my-ssr-db
 
     phpmyadmin:
