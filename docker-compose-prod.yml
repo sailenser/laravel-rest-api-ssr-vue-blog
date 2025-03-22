@@ -40,6 +40,6 @@ services:
     networks:
       - my_network
 
-  networks:
-    network-my:
-      driver: bridge
+networks:
+  network-my:
+    driver: bridge
