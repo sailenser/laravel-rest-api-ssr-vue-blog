@@ -11,10 +11,12 @@ class PostsController extends Controller
     public function index() {
         try {
             $posts = Posts::all();
-            return response()->json(['res' => true, 'data' => $posts]);
+            return response()->json(['res' => true, 'data' => $posts])
+                ->header('Content-Type', 'application/json');
         }
         catch (ModelNotFoundException $e) {
-            return response()->json(['errorText' => 'Не удалось получить список всех постов', 'res' => false], 400);
+            return response()->json(['errorText' => 'Не удалось получить список всех постов', 'res' => false], 400)
+                ->header('Content-Type', 'application/json');
         }
     }
 
