@@ -9,6 +9,8 @@ services:
     depends_on:
       - app
     container_name: api-my-ssr-nginx
+    networks:
+      - my_network
 
   app:
     build:
@@ -19,6 +21,10 @@ services:
     depends_on:
       - mysql
     container_name: api-my-ssr-app
+    environment:
+      DB_HOST: mysql
+    networks:
+      - my_network
 
   mysql:
     image: mysql:8.3
@@ -31,3 +37,9 @@ services:
     ports:
       - "8101:3306"
     container_name: api-my-ssr-db
+    networks:
+      - my_network
+
+  networks:
+    network-my:
+      driver: bridge
