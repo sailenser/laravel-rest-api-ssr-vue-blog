@@ -7,7 +7,7 @@ services:
             - ./:/var/www
             - ./_docker/nginx/conf.d:/etc/nginx/conf.d
         ports:
-            - "8080:3500"
+            - "8080:3499"
         depends_on:
             - app
         container_name: test_laravel_nginx

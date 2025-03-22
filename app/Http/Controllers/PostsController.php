@@ -14,7 +14,7 @@ class PostsController extends Controller
             return response()->json(['res' => true, 'data' => $posts]);
         }
         catch (ModelNotFoundException $e) {
-            return response()->json(['errorText' => 'Не удалось получить список постов', 'res' => false], 400);
+            return response()->json(['errorText' => 'Не удалось получить список всех постов', 'res' => false], 400);
         }
     }
 
