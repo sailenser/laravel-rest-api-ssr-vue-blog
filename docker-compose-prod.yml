@@ -4,14 +4,13 @@ services:
     volumes:
       - ./:/var/www
       - ./_docker/nginx/conf.d:/etc/nginx/conf.d
-      - ./storage:/var/www/storage
     ports:
       - "8876:3499"
     depends_on:
       - app
     container_name: api-my-ssr-nginx
     networks:
-      - network-my
+      - api_lavrik_php_site
 
   app:
     build:
@@ -25,7 +24,7 @@ services:
     environment:
       DB_HOST: mysql
     networks:
-      - network-my
+      - api_lavrik_php_site
 
   mysql:
     image: mysql:8.3
@@ -39,8 +38,10 @@ services:
       - "8101:3306"
     container_name: api-my-ssr-db
     networks:
-      - network-my
+      - api_lavrik_php_site
 
 networks:
-  network-my:
+  api_lavrik_php_site:
+    name: api_lavrik_php_site
     driver: bridge
+    external: true
