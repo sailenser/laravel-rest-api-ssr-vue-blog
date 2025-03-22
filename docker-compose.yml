@@ -26,7 +26,7 @@ services:
         volumes:
             - ./tmp/db:/var/lib/mysql
         environment:
-            MYSQL_DATABASE: dbBlogSsrR
+            MYSQL_DATABASE: dbBlogSsr
             MYSQL_ROOT_PASSWORD: root
         ports:
             - "8101:3306"
