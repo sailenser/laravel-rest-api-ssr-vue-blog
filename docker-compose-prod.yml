@@ -34,6 +34,7 @@ services:
     environment:
       MYSQL_DATABASE: dbBlogSsr
       MYSQL_ROOT_PASSWORD: root
+      SERVICE_NAME: db
     ports:
       - "8101:3306"
     container_name: db
