@@ -10,7 +10,7 @@ services:
       - app
     container_name: api-my-ssr-nginx
     networks:
-      - api_lavrik_php_site
+      - app-ssr-network
 
   app:
     build:
@@ -24,7 +24,7 @@ services:
     environment:
       DB_HOST: db
     networks:
-      - api_lavrik_php_site
+      - app-ssr-network
 
   db:
     image: mysql:8.3
@@ -39,10 +39,8 @@ services:
       - "8101:3306"
     container_name: db
     networks:
-      - api_lavrik_php_site
+      - app-ssr-network
 
 networks:
-  api_lavrik_php_site:
-    name: api_lavrik_php_site
+  app-ssr-network:
     driver: bridge
-    external: true
