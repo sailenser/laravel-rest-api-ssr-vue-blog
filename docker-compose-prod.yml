@@ -8,9 +8,9 @@ services:
       - "8876:3499"
     depends_on:
       - app
-    container_name: api-my-ssr-nginx
+    container_name: nginx-ssr-api
     networks:
-      - app-ssr-network
+      - api-ssr-network
 
   app:
     build:
@@ -20,11 +20,9 @@ services:
       - ./:/var/www
     depends_on:
       - db
-    container_name: api-my-ssr-app
-    environment:
-      DB_HOST: db
+    container_name: app-ssr-api
     networks:
-      - app-ssr-network
+      - api-ssr-network
 
   db:
     image: mysql:8.3
@@ -33,14 +31,14 @@ services:
       - ./tmp/db:/var/lib/mysql
     environment:
       MYSQL_DATABASE: dbBlogSsr
+      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root
-      SERVICE_NAME: db
     ports:
       - "8101:3306"
-    container_name: db
+    container_name: db-ssr-api
     networks:
-      - app-ssr-network
+      - api-ssr-network
 
 networks:
-  app-ssr-network:
+  api-ssr-network:
     external: true
