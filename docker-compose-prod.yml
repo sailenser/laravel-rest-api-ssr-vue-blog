@@ -30,10 +30,10 @@ services:
     volumes:
       - ./tmp/db:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: dbBlogSsr
+      MYSQL_DATABASE: dbBlogSsr2
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "8102:3306"
+      - "3306:3306"
     container_name: api-my-ssr-db11
     networks:
       - api-ssr-network
