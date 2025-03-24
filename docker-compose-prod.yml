@@ -19,12 +19,12 @@ services:
     volumes:
       - ./:/var/www
     depends_on:
-      - mysql
+      - base
     container_name: api-my-ssr-app11
     networks:
       - api-ssr-network
 
-  mysql:
+  base:
     image: mysql:8.3
     restart: always
     volumes:
@@ -44,7 +44,7 @@ services:
     ports:
       - "8083:80"
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: base
       MYSQL_ROOT_PASSWORD: root
     container_name: api-my-ssr-phpmyadmin11
     networks:
