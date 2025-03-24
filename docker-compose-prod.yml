@@ -9,6 +9,8 @@ services:
     depends_on:
       - app
     container_name: api-my-ssr-nginx11
+    networks:
+      - api-ssr-network
 
   app:
     build:
@@ -19,6 +21,8 @@ services:
     depends_on:
       - mysql
     container_name: api-my-ssr-app11
+    networks:
+      - api-ssr-network
 
   mysql:
     image: mysql:8.3
@@ -31,6 +35,8 @@ services:
     ports:
       - "8102:3306"
     container_name: api-my-ssr-db11
+    networks:
+      - api-ssr-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -41,3 +47,11 @@ services:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: root
     container_name: api-my-ssr-phpmyadmin11
+    networks:
+      - api-ssr-network
+
+networks:
+  api-ssr-network:
+    name: api-ssr-network
+    driver: bridge
+    external: true
