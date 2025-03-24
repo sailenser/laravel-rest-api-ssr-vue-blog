@@ -5,12 +5,10 @@ services:
       - ./:/var/www
       - ./_docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "8876:3499"
+      - "8876:3476"
     depends_on:
       - app
-    container_name: nginx-ssr-api
-    networks:
-      - api-ssr-network
+    container_name: api-my-ssr-nginx
 
   app:
     build:
@@ -18,13 +16,11 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
-    container_name: app-ssr-api
     depends_on:
-      - db
-    networks:
-      - api-ssr-network
+      - mysql
+    container_name: api-my-ssr-app
 
-  db:
+  mysql:
     image: mysql:8.3
     restart: always
     volumes:
@@ -32,16 +28,16 @@ services:
     environment:
       MYSQL_DATABASE: dbBlogSsr
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_USER: root
     ports:
-      - "8101:3306"
-    container_name: db-ssr-api
-    command: --pid-file /var/lib/mysql/mysqld.pid
-    networks:
-      - api-ssr-network
+      - "8102:3306"
+    container_name: api-my-ssr-db
 
-networks:
-  api-ssr-network:
-    name: api-ssr-network
-    driver: bridge
-    external: true
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - "8083:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    container_name: api-my-ssr-phpmyadmin

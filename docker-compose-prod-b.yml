@@ -18,9 +18,9 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
+    container_name: app-ssr-api
     depends_on:
       - db
-    container_name: app-ssr-api
     networks:
       - api-ssr-network
 
@@ -31,14 +31,17 @@ services:
       - ./tmp/db:/var/lib/mysql
     environment:
       MYSQL_DATABASE: dbBlogSsr
-      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
     ports:
       - "8101:3306"
     container_name: db-ssr-api
+    command: --pid-file /var/lib/mysql/mysqld.pid
     networks:
       - api-ssr-network
 
 networks:
   api-ssr-network:
+    name: api-ssr-network
+    driver: bridge
     external: true
