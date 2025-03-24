@@ -8,7 +8,7 @@ services:
       - "8876:3476"
     depends_on:
       - app
-    container_name: api-my-ssr-nginx
+    container_name: api-my-ssr-nginx11
 
   app:
     build:
@@ -18,7 +18,7 @@ services:
       - ./:/var/www
     depends_on:
       - mysql
-    container_name: api-my-ssr-app
+    container_name: api-my-ssr-app11
 
   mysql:
     image: mysql:8.3
@@ -30,7 +30,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "8102:3306"
-    container_name: api-my-ssr-db
+    container_name: api-my-ssr-db11
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -40,4 +40,4 @@ services:
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: root
-    container_name: api-my-ssr-phpmyadmin
+    container_name: api-my-ssr-phpmyadmin11
