@@ -33,7 +33,7 @@ services:
       MYSQL_DATABASE: dbBlogSsr2
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3897:3306"
+      - "3306:3306"
     container_name: api-my-ssr-db11
     networks:
       - api-ssr-network
