@@ -8,7 +8,7 @@ services:
       - "8080:80"
     depends_on:
       - php
-    container_name: api-my-ssr-nginx11
+    container_name: nginx
     networks:
       - api-ssr-network
 
@@ -36,7 +36,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
-    container_name: api-my-ssr-db11
+    container_name: base
     networks:
       - api-ssr-network
 
