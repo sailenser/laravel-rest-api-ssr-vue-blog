@@ -5,7 +5,7 @@ services:
       - ./:/var/www
       - ./_docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "8876:80"
+      - "8080:80"
     depends_on:
       - laravel
     container_name: api-my-ssr-nginx11
