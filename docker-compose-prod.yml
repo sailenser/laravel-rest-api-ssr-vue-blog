@@ -21,6 +21,8 @@ services:
     depends_on:
       - base
     container_name: api-my-ssr-app11
+    expose:
+      - "8000"
     networks:
       - api-ssr-network
 
