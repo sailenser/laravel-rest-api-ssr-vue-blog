@@ -4,6 +4,8 @@ services:
     volumes:
       - ./:/var/www
       - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+      - storage:/usr/share/nginx/html/storage:rw
+      - public:/usr/share/nginx/html/public:ro
     ports:
       - "8876:3476"
     depends_on:
@@ -18,9 +20,13 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
+      - storage:/usr/share/nginx/html/storage:rw
+      - public:/usr/share/nginx/html/public:rw
     depends_on:
       - base
     container_name: api-my-ssr-app11
+    ports:
+      - "9000:9000"
     expose:
       - "9000"
     networks:
