@@ -14,7 +14,7 @@ services:
     depends_on:
       - database
     networks:
-      - laravel_network
+      - api-ssr-network
 
   database:
     image: mysql:8.0
@@ -30,7 +30,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - laravel_network
+      - api-ssr-network
 
   webserver:
     image: nginx:alpine
