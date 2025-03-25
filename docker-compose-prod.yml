@@ -33,20 +33,8 @@ services:
       MYSQL_DATABASE: dbBlogSsr2
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "3897:3306"
     container_name: api-my-ssr-db11
-    networks:
-      - api-ssr-network
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    restart: always
-    ports:
-      - "8083:80"
-    environment:
-      PMA_HOST: base
-      MYSQL_ROOT_PASSWORD: root
-    container_name: api-my-ssr-phpmyadmin11
     networks:
       - api-ssr-network
 
