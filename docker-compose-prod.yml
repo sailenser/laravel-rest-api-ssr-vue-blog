@@ -20,12 +20,11 @@ services:
       - ./:/var/www
     depends_on:
       - base
-    container_name: api-my-ssr-app11
+    container_name: laravel
     networks:
       - api-ssr-network
     expose:
       - "8000"
-
 
   base:
     image: mysql:8.3
