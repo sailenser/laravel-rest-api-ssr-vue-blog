@@ -6,6 +6,17 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\CategoryPostsController;
 
+Route::get('/', function () {
+    return response()->json([
+        'message' => 'Добро пожаловать в API!',
+        'status' => 'success',
+        'data' => [
+            'version' => '1.0',
+            'author' => 'max'
+        ]
+    ]);
+});
+
 Route::get('/posts', [PostsController::class, 'index'])->name('posts');
 Route::get('/posts/{id}', [PostsController::class, 'one'])->name('one-post');
 Route::post('/posts', [PostsController::class, 'createPost'])->name('posts-create');

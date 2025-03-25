@@ -25,6 +25,10 @@ php artisan config:clear
 php artisan cache:clear
 php artisan route:cache
 
+docker exec -it api-my-ssr-app11 php artisan config:clear
+docker exec -it api-my-ssr-app11 php artisan cache:clear
+docker exec -it api-my-ssr-app11 php artisan config:cache
+
 Применить права для Debian файлов если php storm ругается
 sudo chown -R $USER:$USER api-my-ssr-dev.ru
 
