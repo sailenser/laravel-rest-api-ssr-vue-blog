@@ -7,12 +7,12 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - laravel
+      - php
     container_name: api-my-ssr-nginx11
     networks:
       - api-ssr-network
 
-  laravel:
+  php:
     build:
       context: .
       dockerfile: _docker/app/Dockerfile
@@ -20,11 +20,11 @@ services:
       - ./:/var/www
     depends_on:
       - base
-    container_name: laravel
+    container_name: php
     networks:
       - api-ssr-network
     expose:
-      - "8000"
+      - "9000"
 
   base:
     image: mysql:8.3
