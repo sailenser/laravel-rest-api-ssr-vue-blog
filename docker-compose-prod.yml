@@ -5,14 +5,14 @@ services:
       - ./:/var/www
       - ./_docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "8876:3476"
+      - "8876:80"
     depends_on:
-      - app
+      - laravel
     container_name: api-my-ssr-nginx11
     networks:
       - api-ssr-network
 
-  app:
+  laravel:
     build:
       context: .
       dockerfile: _docker/app/Dockerfile
@@ -21,10 +21,11 @@ services:
     depends_on:
       - base
     container_name: api-my-ssr-app11
-    expose:
-      - "8000"
     networks:
       - api-ssr-network
+    expose:
+      - "8000"
+
 
   base:
     image: mysql:8.3
