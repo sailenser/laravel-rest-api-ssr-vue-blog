@@ -12,7 +12,7 @@ services:
     networks:
       - api-ssr-network
     extra_hosts:
-      - "api-blog-srr.fronterbest.ru:46.175.150.37"
+      - "api-blog-srr.fronterbest.ru:host-gateway"
 
   app:
     image: php:8.3-fpm
