@@ -3,7 +3,7 @@ services:
     image: nginx:latest
     volumes:
       - ./:/var/www
-      - ./_docker/nginx/default.d:/etc/nginx/default.d
+      - ./_docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "8876:80"
     depends_on:
