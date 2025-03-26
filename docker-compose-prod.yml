@@ -11,6 +11,8 @@ services:
     container_name: api-my-ssr-nginx11
     networks:
       - api-ssr-network
+    extra_hosts:
+      - "api-blog-srr.fronterbest.ru:46.175.150.37"
 
   app:
     image: php:8.3-fpm
