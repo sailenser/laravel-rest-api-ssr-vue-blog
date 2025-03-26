@@ -1,19 +1,4 @@
 services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./:/var/www
-      - ./_docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "8876:80"
-    depends_on:
-      - app
-    container_name: api-my-ssr-nginx11
-    networks:
-      - api-ssr-network
-    extra_hosts:
-      - "api-blog-srr.fronterbest.ru:host-gateway"
-
   app:
     image: php:8.3-fpm
     build:
@@ -27,6 +12,8 @@ services:
     container_name: api-my-ssr-app11
     networks:
       - api-ssr-network
+    ports:
+      - "127.0.0.1:9000:9000"
 
   base:
     image: mysql:8.3
