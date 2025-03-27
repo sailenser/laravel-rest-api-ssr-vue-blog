@@ -12,7 +12,8 @@ phpMyAdmin
 Чиним корсы
 php artisan config:publish cors
 
-Создание бытовых команд
+Создание бытовых команд(#DB_HOST=base) для выполнения миграций!!!!
+DB_HOST=127.0.0.1 для получения инфы с сайта
 php artisan make:controller PostsController  - создать контроллер
 php artisan make:migration create_posts_table - создать миграцию
 php artisan migrate:refresh - перезоздать таблицы из миграции
