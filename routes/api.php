@@ -13,7 +13,8 @@ Route::get('/', function () {
         'data' => [
             'version' => '1.0',
             'author' => 'max'
-        ]
+        ],
+        200
     ]);
 });
 
