@@ -8,7 +8,7 @@ services:
       - "8876:3476"
     depends_on:
       - app
-    container_name: api-my-ssr-nginx11
+    container_name: api-my-ssr-nginx
     networks:
       - api-ssr-network
 
@@ -20,7 +20,7 @@ services:
       - ./:/var/www
     depends_on:
       - base
-    container_name: api-my-ssr-app11
+    container_name: api-my-ssr-app
     networks:
       - api-ssr-network
 
@@ -33,8 +33,8 @@ services:
       MYSQL_DATABASE: dbBlogSsr3
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306:3306"
-    container_name: api-my-ssr-db11
+      - "3784:3306"
+    container_name: api-my-ssr-db
     networks:
       - api-ssr-network
 
