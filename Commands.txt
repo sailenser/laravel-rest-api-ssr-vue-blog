@@ -22,6 +22,7 @@ php artisan make:seeder PostsSeeder - создать наполнитель те
 php artisan db:seed - запуск наполнителя текста
 php artisan migrate:fresh --seed - Если нужно очистить базу и пересоздать все таблицы перед заполнением
 
+php artisan config:cache
 php artisan config:clear
 php artisan cache:clear
 php artisan route:cache
