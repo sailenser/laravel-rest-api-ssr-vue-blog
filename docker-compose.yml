@@ -5,7 +5,7 @@ services:
             - ./:/var/www
             - ./_docker/nginx/conf.d:/etc/nginx/conf.d
         ports:
-            - "8876:3499"
+            - "8876:3476"
         depends_on:
             - app
         container_name: api-my-ssr-nginx
@@ -26,7 +26,7 @@ services:
         volumes:
             - ./tmp/db:/var/lib/mysql
         environment:
-            MYSQL_DATABASE: dbBlogSsr
+            MYSQL_DATABASE: blogSsrDB
             MYSQL_ROOT_PASSWORD: root
         ports:
             - "8101:3306"

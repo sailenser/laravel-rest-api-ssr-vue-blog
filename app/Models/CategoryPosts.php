@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CategoryPosts extends Model
 {
     protected $fillable = [
+        'id',
         'name',
         'url',
         'parent_id',
@@ -16,7 +17,8 @@ class CategoryPosts extends Model
 
     public function allPosts()
     {
-        return $this->hasMany(Posts::class);
+        // Указываем, что у категории может быть много постов
+        return $this->hasMany(Posts::class, 'category_id');
     }
 
     public function getCreatedAtAttribute($value)

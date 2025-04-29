@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id()->primary();
             $table->string('url');
             $table->string('title');
+            $table->string('description');
+            $table->string('data');
             $table->text('contents');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');

@@ -12,6 +12,8 @@ class Posts extends Model
     protected $fillable = [
         'url',
         'title',
+        'description',
+        'data',
         'contents',
         'user_id',
         'category_id',
@@ -19,12 +21,14 @@ class Posts extends Model
 
     public function comments()
     {
+        // Указываем, что у поста может быть много комментариев
         return $this->hasMany(Comments::class);
     }
 
     public function category()
     {
-        return $this->belongsTo(CategoryPosts::class);
+        // Указываем, что категория принадлежит посту
+        return $this->belongsTo(CategoryPosts::class, 'category_id');
     }
 
     public function getCreatedAtAttribute($value)

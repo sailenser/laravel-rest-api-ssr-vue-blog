@@ -95,10 +95,13 @@ class PostsController extends Controller
     public function deletePost($id)
     {
         if (!auth()->user()) {
-            return response()->json(['error' => 'Unauthorized', 'res' => false], 401);
+            return response()->json(
+                ['error' => 'Unauthorized',
+                    'res' => false
+                ], 401);
         }
 
-        $post = Post::find($id);
+        $post = Posts::findOrFail($id);
 
         if (!$post) {
             return response()->json([

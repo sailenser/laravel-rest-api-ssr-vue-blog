@@ -34,7 +34,7 @@ class CategoryPostSeeder extends Seeder
             [
                 'name' => 'Подкатегория 1.2',
                 'url' => 'subcat1',
-                'parent_id' => NULL,
+                'parent_id' => 1,
                 'is_visible' => '1',
                 'created_at' => Carbon::now()->setTimezone('Europe/Moscow'),
                 'updated_at' => Carbon::now()->setTimezone('Europe/Moscow'),

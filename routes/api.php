@@ -25,6 +25,7 @@ Route::put('/posts/{id}', [PostsController::class, 'updatePost'])->name('update-
 Route::delete('/posts/{id}', [PostsController::class, 'deletePost'])->name('delete-post');
 Route::get('/comments/post/{id}', [CommentsController::class, 'commentsPost'])->name('comments');
 Route::get('/category', [CategoryPostsController::class, 'index'])->name('category');
+Route::get('/category/{id}', [CategoryPostsController::class, 'categoryPostsOne'])->name('category-posts');
 
 Route::group([
     'middleware' => 'api',
