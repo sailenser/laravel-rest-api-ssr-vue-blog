@@ -13,11 +13,6 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -25,21 +20,11 @@ class User extends Authenticatable implements JWTSubject
         'roles',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -48,21 +33,11 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
     public function getJWTCustomClaims()
     {
         return [];
@@ -76,5 +51,11 @@ class User extends Authenticatable implements JWTSubject
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('Y-m-d H:i:s');
+    }
+
+    public function comments()
+    {
+        // Указываем, что у поста может быть много комментариев
+        return $this->hasMany(Comments::class);
     }
 }
