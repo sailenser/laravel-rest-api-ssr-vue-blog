@@ -5,16 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class AuthController extends Controller
 {
 
-    /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function register() {
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
@@ -37,12 +33,66 @@ class AuthController extends Controller
         return response()->json(['res' => true, 'data' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'roles' => $user->roles]], 201);
     }
 
+    public function updateUser(string $id) {
+        if (!auth()->user()) {
+            return response()->json(['error' => 'Unauthorized', 'res' => false], 401);
+        }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+        $validator = Validator::make(request()->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+            'password_confirmation' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['errorText' => $validator->errors(), 'res' => false], 422);
+        }
+
+        $user = User::findOrFail($id);
+        $user->name = request()->name;
+        $user->email = request()->email;
+        $user->roles = request()->roles;
+        $user->password = bcrypt(request()->password);
+        $user->save();
+
+        return response()->json([
+            'res' => true,
+            'data' => [
+                'id' => $id,
+                'name' =>  $user->name,
+                'roles' => $user->roles,
+            ]
+        ], 200);
+    }
+
+    public function one(string $id) {
+        if (!auth()->user()) {
+            return response()->json(['error' => 'Unauthorized', 'res' => false], 401);
+        }
+
+        try {
+            $user = User::findOrFail($id);
+
+            return response()->json([
+                'res' => true,
+                'data' => [
+                    'id' => $id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'roles' => $user->roles
+                ]
+            ]);
+        }
+        catch (ModelNotFoundException $e) {
+            return response()->json(
+                [
+                    'errorText' => 'Данный пользователь отстутсвует',
+                    'res' => false],
+                400);
+        }
+    }
+
     public function login() {
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
@@ -84,7 +134,11 @@ class AuthController extends Controller
         if (auth()->user()) {
             return response()->json([
                 'data' => [
-                    'user' => ['id' => auth()->user()->id, 'name' => auth()->user()->name, 'roles' => auth()->user()->roles],
+                    'user' => [
+                        'id' => auth()->user()->id,
+                        'name' => auth()->user()->name,
+                        'roles' => auth()->user()->roles
+                    ],
                     'auth' => true,
                 ],
                 'res' => true,
