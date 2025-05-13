@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
       libpng-dev \
       libzip-dev \
       zip unzip \
+      bash \
+      libreadline-dev \
       git && \
       docker-php-ext-install pdo_mysql && \
       docker-php-ext-install bcmath && \
@@ -18,6 +20,8 @@ COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV TERM=xterm-256color
+ENV SHELL=/bin/bash
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/local/bin
