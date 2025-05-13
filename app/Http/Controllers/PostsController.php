@@ -35,31 +35,49 @@ class PostsController extends Controller
 
     public function createPost() {
         if (!auth()->user()) {
-            return response()->json(['error' => 'Unauthorized', 'res' => false], 401);
+            return response()->json(
+                [
+                    'error' => 'Unauthorized',
+                    'res' => false
+                ], 401);
         }
 
         $validator = Validator::make(request()->all(), [
             'url' => 'required',
             'title' => 'required',
             'contents' => 'required',
+            'description' => 'required',
             'category_id' => 'required',
         ]);
 
         if($validator->fails()){
-            return response()->json(['errorText' => $validator->errors(), 'res' => false], 422);
+            return response()->json(
+                [
+                    'errorText' => $validator->errors(),
+                    'res' => false
+                ],
+                422);
         }
 
         $post = new Posts;
         $post->url = request()->url;
         $post->title = request()->title;
-        $post->user_id = 1;
+        $post->description = request()->description;
+        $post->user_id = auth()->user()->id;
         $post->contents = request()->contents;
         $post->category_id = request()->category_id;
+        $post->data = now()->translatedFormat('j F Y г.');
         $post->save();
 
         return response()->json([
             'res' => true,
-            'data' => ['id' => $post->id,  'title' => $post->title, 'contents' => $post->contents]
+            'data' =>
+                [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'contents' => $post->contents,
+                    'description' => $post->description,
+                ]
         ], 201);
     }
 
